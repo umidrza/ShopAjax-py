@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        {% block title %}
+            ShopAjax
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="container">
+                <nav>
+                    <div class="nav-logo">
+                        <img src="https://svgmix.com/uploads/5a27fe-envato.svg" />
+                    </div>
+                    <div class="nav-links">
+                        <ul class="links">
+                            <li><a href="#">Demos</a></li>
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">Works</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Pages</a></li>
+                            <li class="dropdown-btn">
+                                <a href="#">Products</a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'home' %}">All Products</a></li>
+                                    <li><a href="{% url 'store:product-create' %}">Create</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-icons">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa-regular fa-user"></i>
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-bookmark"></i>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        {% block main %}
+            Nothing here
+        {% endblock main %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <div class="signup">
+                    <h4>NEWSLETTER — SIGN UP</h4>
+                    <p>Be the first to know about special offers, new product launches, and events.</p>
+                    <form>
+                        <input type="text" placeholder="Your Email">
+                        <button>Subscribe</button>
+                    </form>
+                </div>
+                <div class="links">
+                    <div>
+                        <h4>Shop</h4>
+                        <ul>
+                            <li>Shop All</li>
+                            <li>Woman Collection</li>
+                            <li>Man Collection</li>
+                            <li>Accessories</li>
+                            <li>New Arrivals</li>
+                            <li>Latest Collection</li>
+                            <li>Gift Card</li>
+                            <li>Top Sellers</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>CUSTOMERS</h4>
+                        <ul>
+                            <li>Faqs</li>
+                            <li>Shipping</li>
+                            <li>Returns</li>
+                            <li>Terms</li>
+                            <li>Contact Us</li>
+                            <li>Privacy</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>CONTACT US</h4>
+                        <ul>
+                            <li>help@yourwebsite.com</li>
+                            <li>1-888-625-80644</li>
+                            <li>1-888-912-83735</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="last">
+                <p>© 2024 Uncode. All rights reserved</p>
+                <div class="icons">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let formIdx = $('#id_images-TOTAL_FORMS').val();
+            $('#add-image').click(function() {
+                $('#formset').append($('#empty-form').html().replace(/__prefix__/g, formIdx));
+                formIdx++;
+                $('#id_images-TOTAL_FORMS').val(formIdx);
+            });
+        });
+    </script>
+</body>
+
+</html>

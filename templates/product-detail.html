@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Product Details
+{% endblock title %}
+
+{% block main %}
+
+<div class="container">
+    <div class="product-detail">
+        <div class="product-image">
+            {% if product.images.count == 0 %}
+                <div class="no-image">No Image</div>
+            {% else %}
+                <img src="/media/{{product.images.first.url}}" />
+            {% endif %}
+        </div>
+        <div class="product-desc">
+            <h1 class="product-name">{{product.name}}</h1>
+            <h1 class="product-price">${{product.price}}</h1>
+            <p class="product-category">
+                Category:
+                {% for category in product.categories.all %}
+                    <span>{{ category.name }}</span>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            {% if product.images.count > 1 %}
+                <div class="product-images">
+                    {% for image in product.images.all %}
+                        <img src="/media/{{image.url}}" onclick="this.closest('.product-detail').querySelector('.product-image img').src = '/media/{{image.url}}'">
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <img class="product-brand-logo" src="/media/{{ product.brand.logo }}">
+        </div>
+        <div class="product-icons">
+            <div class="icon-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="icon-box">
+                <i class="fa-regular fa-heart"></i>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

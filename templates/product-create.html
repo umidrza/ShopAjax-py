@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create Product
+{% endblock title %}
+
+{% block main %}
+
+<div class="container">
+    <h1>Create Product</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ product_form.as_p }}
+        <div id="formset">
+            {{ image_formset.management_form }}
+            {% for image_form in image_formset %}
+                <div class="form-row">
+                    {{ image_form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button class="form-btn" type="button" id="add-image">Add another image</button>
+        <button class="form-btn" type="submit">Save</button>
+    </form>
+
+    <!-- Empty form template for new images -->
+    <div id="empty-form" style="display: none;">
+        <div class="form-row">
+            {{ image_formset.empty_form.as_p }}
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
+
+

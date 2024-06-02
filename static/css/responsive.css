@@ -1,0 +1,17 @@
+@media screen and (max-width: 430px) {
+    :root{
+        --product-row-count: 1;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .footer-links, footer .links{
+        flex-direction: column;
+    }
+
+    .sidebar-products{
+        grid-template-columns: 1fr;
+    }
+}

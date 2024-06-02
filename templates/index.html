@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block main %}
+
+<div class="heading">
+    <div class="container">
+        <article>
+            <h5>BACKPACK COLLECTION</h5>
+            <h1>Discover must-have <br> special offers and promos</h1>
+            <button>Discover Now</button>
+        </article>
+    </div>
+</div>
+
+<div class="products-container">
+    <div class="container">
+        <div class="products-header">
+            <div>
+                <h4>Sort by latest</h4>
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <div>
+                <h4>Show filters</h4>
+                <i class="fa-solid fa-bars-progress"></i>
+            </div>
+        </div>
+        <div class="sidebar-products">
+            <div class="sidebar">
+                <div class="sortby">
+                    <div class="sidebar-dropdown-btn">
+                        <h4>Categories</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <hr>
+                    <div class="sidebar-dropdown">
+                        <ul class="categories">
+                            {% for category in categories %}
+                            <li>
+                                <input type="checkbox" id="{{category.name}}">
+                                <label for="{{category.name}}">{{category.name}} ({{category.products.count}})</label>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="sortby">
+                    <div class="sidebar-dropdown-btn">
+                        <h4>Brands</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <hr>
+                    <div class="sidebar-dropdown">
+                        <ul class="brand-logos">
+                            {% for brand in brands %}
+                            <li>
+                                <img src="media/{{brand.logo}}" />
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="sortby">
+                    <div class="sidebar-dropdown-btn">
+                        <h4>Colors</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <hr>
+                    <div class="sidebar-dropdown">
+                        <ul class="colors">
+                            {% for color in colors %}
+                            <li>
+                                <input type="radio" id="{{color.name}}" name="colors">
+                                <label for="{{color.name}}">
+                                    {{color.name.capitalize}} ({{color.images.count}})
+                                    <div class="color-box" 
+                                         style="background-color: {{color.name}}; 
+                                         {% if color.name == 'white' %} 
+                                         border: 1px black solid;
+                                         {% endif %}">
+                                    </div>
+                                </label>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="products">
+                    {% for product in products %}
+                    <div class="product">
+                        <div class="product-image">
+                            {% if product.images.count == 0 %}
+                                <div class="no-image">No Image</div>
+                            {% else %}
+                                <a href="{% url 'store:product-detail' id=product.id %}">
+                                    <img src="media/{{product.images.first.url}}" />
+                                </a>
+                                {% if product.images.count > 1 %}
+                                    <div class="product-colors">
+                                        {% for image in product.images.all %}
+                                            <div class="product-color" style="background-color: {{image.color.name}}"
+                                                onclick="this.closest('.product-image').querySelector('img').src = 'media/{{image.url}}'">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="product-desc">
+                            <p class="product-category">
+                                {% for category in product.categories.all|slice:":2" %}
+                                <span>{{ category.name }}</span>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                            <a href="{% url 'store:product-detail' id=product.id %}" class="product-name">{{product.name}}</a>
+                            <p class="product-price">${{product.price}}</p>
+                            <hr>
+                            <img class="product-brand-logo" src="media/{{ product.brand.logo }}">
+                        </div>
+                        <div class="product-icons">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <div class="icon-box">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="pagination">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <div class="links">
+                        <a href="">1</a>
+                        <a href="">2</a>
+                        <a href="">3</a>
+                        <a href="">4</a>
+                    </div>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
