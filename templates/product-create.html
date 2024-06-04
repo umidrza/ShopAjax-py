@@ -10,12 +10,12 @@
     <h1>Create Product</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ product_form.as_p }}
+        {{ product_form}}
         <div id="formset">
             {{ image_formset.management_form }}
             {% for image_form in image_formset %}
                 <div class="form-row">
-                    {{ image_form.as_p }}
+                    {{ image_form }}
                 </div>
             {% endfor %}
         </div>
@@ -26,11 +26,30 @@
     <!-- Empty form template for new images -->
     <div id="empty-form" style="display: none;">
         <div class="form-row">
-            {{ image_formset.empty_form.as_p }}
+            {{ image_formset.empty_form }}
         </div>
     </div>
 </div>
 
 {% endblock main %}
 
+
+{% block scripts %}
+
+<script>
+    $('#id_categories').select2();
+</script>
+
+<script>
+    $(document).ready(function() {
+        let formIdx = $('#id_images-TOTAL_FORMS').val();
+        $('#add-image').click(function() {
+            $('#formset').append($('#empty-form').html().replace(/__prefix__/g, formIdx));
+            formIdx++;
+            $('#id_images-TOTAL_FORMS').val(formIdx);
+        });
+    });
+</script>
+
+{% endblock scripts %}
 
