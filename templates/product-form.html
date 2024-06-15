@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Create Product
+    {{ view_name }}
 {% endblock title %}
 
 {% block main %}
 
 <div class="container">
-    <h1>Create Product</h1>
+    <h1>{{ view_name }}</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ product_form}}

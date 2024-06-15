@@ -97,7 +97,7 @@
                             {% if product.images.count == 0 %}
                                 <div class="no-image">No Image</div>
                             {% else %}
-                                <a href="{% url 'store:product-detail' id=product.id %}">
+                                <a href="{% url 'store:product-detail' product.id %}">
                                     <img src="media/{{product.images.first.url}}" />
                                 </a>
                                 {% if product.images.count > 1 %}
@@ -117,7 +117,7 @@
                                 <span>{{ category.name }}</span>{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </p>
-                            <a href="{% url 'store:product-detail' id=product.id %}" class="product-name">{{product.name}}</a>
+                            <a href="{% url 'store:product-detail' product.id %}" class="product-name">{{product.name}}</a>
                             <p class="product-price">${{product.price}}</p>
                             <hr>
                             <img class="product-brand-logo" src="media/{{ product.brand.logo }}">

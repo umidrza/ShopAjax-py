@@ -42,5 +42,8 @@
             </div>
         </div>
     </div>
+
+    <a href="{% url 'store:product-update' product.id %}"><button class="form-btn">Update Product</button></a>
+    <a href="{% url 'store:product-delete' product.id %}"><button class="form-btn">Delete Product</button></a>
 </div>
 {% endblock main %}
